@@ -2,7 +2,6 @@ package com.ecommerce.product_service.service.imple;
 
 import com.ecommerce.product_service.Entity.Product;
 import com.ecommerce.product_service.Exception.ResourceNotFoundException;
-import com.ecommerce.product_service.event.ProductUpdatedEvent;
 import com.ecommerce.product_service.model.*;
 import com.ecommerce.product_service.repository.ProductRespository;
 import com.ecommerce.product_service.service.ProductService;
@@ -48,14 +47,6 @@ public class ProductServiceImple implements ProductService {
         product.setDescription(request.getDescription());
         productRepository.save(product);
 
-        // Emit event
-        ProductUpdatedEvent event = ProductUpdatedEvent.builder()
-                .productId(product.getId())
-                .name(product.getName())
-                .price(product.getPrice())
-                .build();
-
-        //eventPublisher.publishProductUpdated(event);
     }
 
     @Override
