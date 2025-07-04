@@ -1,0 +1,20 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        # ✅ Normal routes for auth-service APIs
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/api/auth/**
+
+        # ✅ Normal routes for product-service APIs
+        - id: product-service
+          uri: lb://product-service
+          predicates:
+            - Path=/api/products/**

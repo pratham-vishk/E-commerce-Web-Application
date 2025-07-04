@@ -1,16 +1,17 @@
-package com.ecommerce.config_server;
+package com.ecommerce.auth_service;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.config.server.EnableConfigServer;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication
-@EnableConfigServer
+@EnableFeignClients
 @EnableWebMvc
-public class ConfigServerApplication {
+public class AuthServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ConfigServerApplication.class, args);
+		SpringApplication.run(AuthServiceApplication.class, args);
 	}
 
 }

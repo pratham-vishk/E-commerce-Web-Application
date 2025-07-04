@@ -1,13 +1,13 @@
+server:
+  port: 8081
+
 spring:
   application:
     name: config-server
-
   cloud:
     config:
       server:
         git:
-          uri: https://github.com/pratham-vishk/E-commerce-Web-Application
+          uri: https://github.com/GnyanRanjanBehera/Task-Pay-Config.git
           clone-on-start: true
-          default-label: master
-server:
-  port: 8090
+
