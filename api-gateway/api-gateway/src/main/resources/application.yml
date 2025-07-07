@@ -7,14 +7,48 @@ spring:
   cloud:
     gateway:
       routes:
+        # ✅ Swagger proxy route for auth-service
+        - id: auth-service-docs
+          uri: lb://auth-service
+          predicates:
+            - Path=/api/auth-service/**  # Used only for Swagger
+          filters:
+            - RewritePath=/api/auth-service/(?<segment>.*), /${segment}
+
         # ✅ Normal routes for auth-service APIs
         - id: auth-service
           uri: lb://auth-service
           predicates:
             - Path=/api/auth/**
 
+        # ✅ Swagger proxy route for product-service
+        - id: product-service-docs
+          uri: lb://product-service
+          predicates:
+            - Path=/api/product-service/**  # Used only for Swagger
+          filters:
+            - RewritePath=/api/product-service/(?<segment>.*), /${segment}
+
         # ✅ Normal routes for product-service APIs
         - id: product-service
           uri: lb://product-service
           predicates:
             - Path=/api/products/**
+application:
+  security:
+    jwt:
+      secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+      expiration: 86400000
+      refresh-token:
+        expiration: 604800000
+
+springdoc:
+#  api-docs:
+#    enabled: false
+  swagger-ui:
+    urls:
+      - name: auth-service
+        url: /api/auth-service/v3/api-docs
+      - name: product-service
+        url: /api/product-service/v3/api-docs
+
